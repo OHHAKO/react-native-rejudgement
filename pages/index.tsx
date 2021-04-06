@@ -1,6 +1,11 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 
+interface Case {
+  number: string;
+  name: string;
+}
+
 export default function Home(): React.ReactElement {
   const styles = StyleSheet.create({
     root: {
@@ -48,7 +53,7 @@ export default function Home(): React.ReactElement {
 
     caseCell: {
       width: "100%",
-      backgroundColor: "red",
+      backgroundColor: "black",
       flexDirection: "row",
       flexWrap: "wrap",
     },
@@ -56,7 +61,6 @@ export default function Home(): React.ReactElement {
     case: {
       width: "50%",
       flexGrow: 1,
-      backgroundColor: "green",
       flexDirection: "column",
       alignItems: "center",
       padding: 20,
@@ -79,6 +83,25 @@ export default function Home(): React.ReactElement {
     },
   });
 
+  const cases: Case[] = [
+    {
+      number: "2018고단4404",
+      name: "'여자=음란물'인 사이트",
+    },
+    {
+      number: "2019도2562",
+      name: "지사님은 성범죄자",
+    },
+    {
+      number: "2009도7948",
+      name: "가해자(56, 남)-피해자(8,여) ",
+    },
+    {
+      number: "2018노2855",
+      name: "초국가적 성범죄자, 그는 한(국)남(자)",
+    },
+  ];
+
   return (
     <>
       <View style={styles.root}>
@@ -90,37 +113,15 @@ export default function Home(): React.ReactElement {
             다음 중 사건을 골라 판결을 내려주세요.
           </Text>
           <View style={styles.caseCell}>
-            <View style={styles.case}>
-              <Image
-                style={styles.caseImage}
-                source={require("../assets/2018고단4404_0.png")}
-              />
-              <Text style={styles.caseName}> '여자=음란물'인 사이트 </Text>
-            </View>
-            <View style={styles.case}>
-              <Image
-                style={styles.caseImage}
-                source={require("../assets/2018고단4404_0.png")}
-              />
-              <Text style={styles.caseName}> 지사님은 성범죄자 </Text>
-            </View>
-            <View style={styles.case}>
-              <Image
-                style={styles.caseImage}
-                source={require("../assets/2018고단4404_0.png")}
-              />
-              <Text style={styles.caseName}> 가해자(56, 남)-피해자(8,여) </Text>
-            </View>
-            <View style={styles.case}>
-              <Image
-                style={styles.caseImage}
-                source={require("../assets/2018고단4404_0.png")}
-              />
-              <Text style={styles.caseName}>
-                {" "}
-                초국가적 성범죄자, 그는 한(국)남(자){" "}
-              </Text>
-            </View>
+            {cases.map((_case, i) => (
+              <View style={styles.case}>
+                <Image
+                  style={styles.caseImage}
+                  source={require(`../assets/${_case.number}_0.png`)}
+                />
+                <Text style={styles.caseName}> ${_case.name} </Text>
+              </View>
+            ))}
           </View>
         </View>
       </View>
